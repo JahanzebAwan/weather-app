@@ -1,7 +1,20 @@
+import {
+  CURRENT_WEATHER_INFO_SUCCESS,
+  CURRENT_WEATHER_INFO_ERROR,
+} from "../slices/weatherSlice";
 import { handleGetRequest } from "../../services/GetTemplate";
-export const getCurrentWeather = (location) => async (dispatch) => {
-  const res = await handleGetRequest(
-    `find?callback=jQuery19105386953673943664_1633515334892&q=${location}&appid=8493b27440382ca5346648dd5110ef62`
-  );
+import { appId } from "../../Config";
+
+export const getCurrentWeather = (searchData) => async (dispatch) => {
+  let url = "";
+  if (searchData.selectedSearchOption === "n")
+    url = `weather?q=${searchData.searchText}&appid=${appId}`;
+  else url = `weather?zip=${searchData.searchText}&appid=${appId}`;
+  const res = await handleGetRequest(url);
   console.log(res);
+  if (res?.status === 200) {
+    dispatch(CURRENT_WEATHER_INFO_SUCCESS(res.data));
+  } else {
+    dispatch(CURRENT_WEATHER_INFO_ERROR());
+  }
 };

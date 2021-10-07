@@ -12,7 +12,7 @@ const slice = createSlice({
         data: action.payload,
       };
     },
-    LOGIN_ERROR: (state) => {
+    CURRENT_WEATHER_INFO_ERROR: (state) => {
       return {
         ...state,
         data: "",
@@ -21,5 +21,6 @@ const slice = createSlice({
   },
 });
 
-export const { LOGIN_SUCCESS, LOGIN_ERROR } = slice.actions;
+export const { CURRENT_WEATHER_INFO_SUCCESS, CURRENT_WEATHER_INFO_ERROR } =
+  slice.actions;
 export default slice.reducer;

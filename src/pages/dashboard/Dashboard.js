@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { getCurrentWeather } from "../../redux/actions/currentWeatherAction";
+import SearchFilter from "../../components/SearchFilter/SearchFilter";
 
 function Dashboard() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    const getCurrentWeatherInfo = async () => {
-      await dispatch(getCurrentWeather("Islamabad, ISB, PAK"));
-    };
-    getCurrentWeatherInfo();
-  });
-  return <div>Hey</div>;
+  const getCurrentWeatherInfo = async (searchData) => {
+    await dispatch(getCurrentWeather(searchData));
+  };
+  return (
+    <div>
+      <SearchFilter getCurrentWeatherInfo={getCurrentWeatherInfo} />
+    </div>
+  );
 }
 
 export default Dashboard;

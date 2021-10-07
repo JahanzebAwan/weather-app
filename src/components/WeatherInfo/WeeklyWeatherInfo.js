@@ -77,21 +77,25 @@ function WeeklyWeatherInfo() {
     );
   };
   return (
-    <Card title={"Weekly Forecast for " + location}>
+    <div>
       {weeklyData ? (
-        <Carousel
-          value={weeklyData}
-          numVisible={3}
-          numScroll={1}
-          responsiveOptions={responsiveOptions}
-          circular
-          autoplayInterval={1000}
-          itemTemplate={template}
-        />
+        <Card title={"Weekly Forecast for " + location}>
+          <Carousel
+            value={weeklyData}
+            numVisible={3}
+            numScroll={1}
+            responsiveOptions={responsiveOptions}
+            circular
+            autoplayInterval={1000}
+            itemTemplate={template}
+          />
+        </Card>
       ) : (
-        <Skeleton width="100%" height="250px"></Skeleton>
+        <Card>
+          <Skeleton width="100%" height="250px"></Skeleton>
+        </Card>
       )}
-    </Card>
+    </div>
   );
 }
 

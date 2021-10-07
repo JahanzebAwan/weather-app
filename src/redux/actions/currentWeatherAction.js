@@ -13,6 +13,7 @@ export const getCurrentWeather = (searchData) => async (dispatch) => {
   const res = await handleGetRequest(url);
   if (res?.status === 200) {
     dispatch(CURRENT_WEATHER_INFO_SUCCESS(res.data));
+    return res.data;
   } else {
     dispatch(CURRENT_WEATHER_INFO_ERROR());
   }

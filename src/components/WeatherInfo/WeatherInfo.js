@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { Skeleton } from "primereact/skeleton";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
+import WeeklyWeatherInfo from "./WeeklyWeatherInfo";
+import TemperatureConvert from "../TemperatureConvert/TemperatureConvert";
 
 function WeatherInfo() {
   const data = useSelector((state) => state.weatherSlice?.data);
@@ -42,7 +44,9 @@ function WeatherInfo() {
       <div className="p-fluid p-formgrid p-grid">
         <div className="p-field p-col-6">
           {data === undefined || data === "" ? (
-            <Skeleton width="100%" height="250px"></Skeleton>
+            <Card>
+              <Skeleton width="100%" height="250px"></Skeleton>
+            </Card>
           ) : (
             <Card title={"Today’s Forecast for " + data.name}>
               <div className="p-fluid p-formgrid p-grid">
@@ -73,6 +77,13 @@ function WeatherInfo() {
               </div>
             </Card>
           )}
+        </div>
+        <div className="p-field p-col-6"></div>
+        <div className="p-field p-col-6">
+          <WeeklyWeatherInfo />
+        </div>
+        <div className="p-field p-col-6">
+          {data !== undefined || data !== "" ? <TemperatureConvert /> : ""}
         </div>
       </div>
     </div>

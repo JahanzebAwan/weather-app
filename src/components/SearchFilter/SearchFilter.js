@@ -8,25 +8,33 @@ import { toast } from "react-toastify";
 function SearchFilter({ getCurrentWeatherInfo }) {
   const [selectedSearchOption, setselectedSearchOption] = useState("");
   const [searchText, setsearchText] = useState("");
+  const [loading, setloading] = useState(false);
+  const [loadingIcon, setloadingIcon] = useState("pi pi-search");
   let searchOptions = [
     { name: "Name", code: "n" },
     { name: "Zip", code: "z" },
   ];
-  const handleSearchFilter = () => {
+  const handleSearchFilter = async () => {
     if (selectedSearchOption === "" || searchText === "")
       toast.warn("Please Enter Required Fields !!");
-    else
-      getCurrentWeatherInfo({
+    else {
+      setloading(true);
+      setloadingIcon("pi pi-spin pi-spinner");
+      await getCurrentWeatherInfo({
         selectedSearchOption: selectedSearchOption?.code,
         searchText,
       });
+      setloading(false);
+      setloadingIcon("pi pi-search");
+    }
   };
   const footer = (
     <div align="center">
       <Button
         iconPos="right"
         label="Search"
-        icon="pi pi-search"
+        disabled={loading}
+        icon={loadingIcon}
         className="p-button-rounded p-button-info"
         onClick={handleSearchFilter}
       />
